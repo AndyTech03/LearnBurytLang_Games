@@ -15,7 +15,7 @@ namespace CompareGame
 
         private bool IsInited;
 
-        private void Start()
+        private void Awake()
         {
             IsInited = false;
         }
@@ -29,7 +29,7 @@ namespace CompareGame
         public void Set_Word(string word)
         {
             if (IsInited == false)
-                throw new Exception("Not Inited!");
+                throw new Exception($"Not Inited! {gameObject.name}");
 
             for (int i = 0; i < Reels.Length; i++)
             {
