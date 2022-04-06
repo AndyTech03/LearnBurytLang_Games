@@ -9,12 +9,20 @@ public class Button : MonoBehaviour
     [SerializeField] private ObjectMover PushMover;
     [SerializeField] private GameObject MovingPart;
     public System.Action ButtonClicked;
+    private bool _isPushed;
 
     public void Init(Material logo_image)
     {
         GetComponentInChildren<Renderer>().materials = new Material[] { logo_image, Back_Image, Back_Image };
         PushMover.SetOnStart(MovingPart);
         PushMover.EndReaching_Notification += OnPushed;
+        _isPushed = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isPushed)
+            ButtonClicked?.Invoke();
     }
 
     private void OnMouseDown()
@@ -29,12 +37,13 @@ public class Button : MonoBehaviour
 
     private void OnPushed()
     {
-        ButtonClicked?.Invoke();
+        _isPushed = true;
     }
 
     private void OnMouseExit()
     {
         OnMouseUp();
+        _isPushed = false;
     }
 
     private void OnMouseUp()
@@ -43,7 +52,7 @@ public class Button : MonoBehaviour
         {
             PushMover.StopMoving();
         }
-
         PushMover.MoveBackvard();
+        _isPushed = false;
     }
 }

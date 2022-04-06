@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7999178210947339214}
   - component: {fileID: 6263324038811188042}
-  - component: {fileID: 47134423638970064}
+  - component: {fileID: 5334691858775341898}
   m_Layer: 0
   m_Name: Dispenser
   m_TagString: Untagged
@@ -46,24 +46,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c57c4613305037488d23cdacb95568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image_StartPos: {fileID: 191542804135043638}
-  Image_EndPos: {fileID: 2037346838150772461}
-  Image_MoveStep_Count: 4
+  ImageMover: {fileID: 5334691858775341898}
   State: 0
   IsDeployed: 0
---- !u!65 &47134423638970064
-BoxCollider:
+--- !u!114 &5334691858775341898
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7226336347634518388}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 14, y: 1, z: 14}
-  m_Center: {x: 0, y: 1.3, z: 2}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4354063c5426d9c49a209fe01274e877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path_Points:
+  - {fileID: 191542804135043638}
+  - {fileID: 2037346838150772461}
+  MoveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RotateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1626165151361388712
 PrefabInstance:
   m_ObjectHideFlags: 0

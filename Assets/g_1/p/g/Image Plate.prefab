@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2714963330765925122}
   - component: {fileID: 7740446262697650757}
+  - component: {fileID: 3752868294953830593}
   m_Layer: 0
   m_Name: Image Plate
   m_TagString: Untagged
@@ -44,6 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c37a9aa0c97960418c05a6153195c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3752868294953830593
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379578164575728056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.18, y: 1, z: 11.88}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7657271427142435572
 PrefabInstance:
   m_ObjectHideFlags: 0

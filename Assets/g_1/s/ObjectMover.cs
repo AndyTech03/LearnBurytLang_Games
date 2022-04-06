@@ -153,7 +153,7 @@ public class ObjectMover : MonoBehaviour
 
                         MoveToNode(index1, index2);
                         if (_progress >= MoveCurve.keys[index2].time * 0.99)
-                        {
+                        {   
                             CurentNode = CurentNode.Next;
                             SetTargetToNode(CurentNode.Data);
                             if (CurentNode.Next == null)
@@ -226,8 +226,8 @@ public class ObjectMover : MonoBehaviour
     private void SetTargetToNode(int index)
     {
         TargetObject.transform.SetParent(Path_Points[index].transform);
-        TargetObject.transform.position = Path_Points[index].transform.position;
-        _progress = RotateCurve.keys[index].value;
+        TargetObject.transform.localPosition = Vector3.zero;
+        _progress = MoveCurve.keys[index].time;
     }
 
     private void FinishMoving(bool is_end)

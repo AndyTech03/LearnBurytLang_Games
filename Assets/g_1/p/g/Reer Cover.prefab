@@ -47,7 +47,7 @@ MonoBehaviour:
   Open_Pos: {x: 0, y: 0, z: 0}
   Close_Pos: {x: 0, y: 0, z: 0}
   Move_Step: {x: 0, y: 0, z: 0}
-  Step_Count: 0
+  Step_Count: 4
   State: 0
 --- !u!1001 &1551082116572239110
 PrefabInstance:

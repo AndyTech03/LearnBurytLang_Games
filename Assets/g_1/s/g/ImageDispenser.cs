@@ -4,19 +4,14 @@ using UnityEngine;
 
 namespace CompareGame
 {
-    /// TODO: Refactor to <see cref="ObjectMover"/>
-    /// 
     public class ImageDispenser : MonoBehaviour
     {
-        [SerializeField] private GameObject Image_StartPos;
-        [SerializeField] private GameObject Image_EndPos;
-        [SerializeField] private int Image_MoveStep_Count;
-        private int Image_MoveSteps;
-        private Vector3 Image_MoveStep;
+        [SerializeField] private ObjectMover ImageMover;
 
         private ImagePlate CurentImage;
 
         public Dispenser_State State;
+        public System.Action ImagesColected;
         private Dispenser_Queue Queue;
 
 
@@ -30,7 +25,7 @@ namespace CompareGame
             Idle
         };
 
-        struct Dispenser_Queue
+        class Dispenser_Queue
         {
             private ImagePlate[] Plates;
             private int count;
@@ -41,9 +36,8 @@ namespace CompareGame
 
             public Dispenser_Queue(int size)
             {
-                Plates = new ImagePlate[size];
-                count = 0;
                 max_count = size;
+                Clear();
             }
 
             public ImagePlate Get()
@@ -62,6 +56,7 @@ namespace CompareGame
             public void Clear()
             {
                 count = 0;
+                Plates = new ImagePlate[max_count];
             }
 
             public void Add(ImagePlate plate)
@@ -77,8 +72,6 @@ namespace CompareGame
         {
             IsDeployed = false;
             State = Dispenser_State.Empty;
-            Image_MoveStep = (Image_StartPos.transform.position - Image_EndPos.transform.position) / Image_MoveStep_Count;
-            Image_MoveSteps = 0;
             IsInited = false;
         }
 
@@ -86,6 +79,17 @@ namespace CompareGame
         {
             Queue = new Dispenser_Queue(images_count);
             IsInited = true;
+            ImageMover.EndReaching_Notification += delegate ()
+            {
+                State = Dispenser_State.Idle;
+            };
+            ImageMover.StartReaching_Notification += delegate ()
+            {
+                State = Dispenser_State.Empty;
+                ImageMover.Get_Object();
+                ImagesColected?.Invoke();
+
+            };
         }
 
         public void FixedUpdate()
@@ -94,7 +98,6 @@ namespace CompareGame
             {
                 if (IsInited == false)
                     throw new System.Exception("Not Inited!");
-
                 switch (State)
                 {
                     case Dispenser_State.Empty:
@@ -102,34 +105,21 @@ namespace CompareGame
                             TryDispensImage();
                             break;
                         }
-                    case Dispenser_State.Dispensing:
-                        {
-                            CurentImage.transform.Translate(Image_MoveStep);
-                            Image_MoveSteps++;
-                            if (Image_MoveSteps == Image_MoveStep_Count)
-                            {
-                                CurentImage.transform.position = Image_EndPos.transform.position;
-                                State = Dispenser_State.Idle;
-                                Image_MoveSteps = 0;
-                            }
-                            break;
-                        }
                 }
-
             }
 
         }
 
-        private void OnMouseDown()
-        {
-            CurentImage.gameObject.SetActive(false);
-            Queue.Add(CurentImage);
-            OnImage_Picked();
-        }
-        public void ClearQueue()
+        public void Close()
         {
             Queue.Clear();
-            CurentImage.gameObject.SetActive(false);
+            if (CurentImage == null)
+            {
+                State = Dispenser_State.Empty;
+                ImagesColected?.Invoke();
+            }
+            else
+                ImageMover.MoveBackvard(true);
         }
 
         public void AddInQueue(ImagePlate image)
@@ -149,6 +139,17 @@ namespace CompareGame
                 throw new System.Exception("Dispenser is not Idle!");
 
             State = Dispenser_State.Empty;
+            ImageMover.Get_Object();
+            CurentImage.Grab -= OnGrab;
+             CurentImage = null;
+        }
+
+        private void OnGrab(ImagePlate image)
+        {
+            if (State == Dispenser_State.Idle)
+            {
+                OnImage_Picked();
+            }
         }
 
         private void TryDispensImage()
@@ -157,9 +158,10 @@ namespace CompareGame
                 return;
 
             CurentImage = Queue.Get();
-            CurentImage.transform.position = Image_StartPos.transform.position;
+            CurentImage.Grab += OnGrab;
+
+            ImageMover.MoveForvard_FromStart(CurentImage.gameObject, true);
             State = Dispenser_State.Dispensing;
-            CurentImage.gameObject.SetActive(true);
         }
     }
 }
