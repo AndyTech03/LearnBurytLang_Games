@@ -12,8 +12,11 @@ namespace CompareGame
         public string Text;
         private bool _grabed;
 
-        private void Start()
+        public bool CanGrab;
+
+        private void Awake()
         {
+            CanGrab = false;
             _grabed = false;
             CurentSlot = null;
         }
@@ -32,8 +35,11 @@ namespace CompareGame
 
         private void OnMouseDown()
         {
-            _grabed = true;
-            Grab?.Invoke(this);
+            if (CanGrab)
+            {
+                _grabed = true;
+                Grab?.Invoke(this);
+            }
         }
 
         public new bool Equals(object x, object y)

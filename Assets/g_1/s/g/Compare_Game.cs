@@ -146,6 +146,11 @@ namespace CompareGame
                     image.CurentSlot.SetImage(nearest_slot.GetImage());
                     nearest_slot.SetImage(image);
                 }
+                else
+                {
+                    image.CurentSlot.GetImage();
+                    nearest_slot.SetImage(image);
+                }
             }
         }
 

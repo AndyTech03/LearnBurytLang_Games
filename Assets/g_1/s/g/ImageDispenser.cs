@@ -82,6 +82,7 @@ namespace CompareGame
             ImageMover.EndReaching_Notification += delegate ()
             {
                 State = Dispenser_State.Idle;
+                CurentImage.CanGrab = true;
             };
             ImageMover.StartReaching_Notification += delegate ()
             {
@@ -160,6 +161,7 @@ namespace CompareGame
             CurentImage = Queue.Get();
             CurentImage.Grab += OnGrab;
 
+            CurentImage.CanGrab = false;
             ImageMover.MoveForvard_FromStart(CurentImage.gameObject, true);
             State = Dispenser_State.Dispensing;
         }
