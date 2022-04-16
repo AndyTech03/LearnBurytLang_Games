@@ -16,6 +16,12 @@ namespace CompareGame
         private ImagePlate CorrectImage;
         private ImagePlate CurentImage;
 
+        public void Clear()
+        {
+            CorrectImage = null;
+            CurentImage = null;
+        }
+
         public void Set_CorrectImage(ImagePlate image)
         {
             Word.Set_Word(image.Text);

@@ -88,7 +88,7 @@ namespace CompareGame
             {
                 State = Dispenser_State.Empty;
                 ImageMover.Get_Object();
-                ImagesColected?.Invoke();
+                CollectImages();
 
             };
         }
@@ -117,10 +117,15 @@ namespace CompareGame
             if (CurentImage == null)
             {
                 State = Dispenser_State.Empty;
-                ImagesColected?.Invoke();
+                CollectImages();
             }
             else
                 ImageMover.MoveBackvard(true);
+        }
+
+        public void CollectImages()
+        {
+            ImagesColected?.Invoke();
         }
 
         public void AddInQueue(ImagePlate image)

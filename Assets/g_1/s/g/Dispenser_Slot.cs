@@ -23,6 +23,8 @@ namespace CompareGame
             Closing
         }
 
+        public System.Action CollectImages => Dispenser.CollectImages;
+
         public void Awake()
         {
             IsInited = false;

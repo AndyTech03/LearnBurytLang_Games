@@ -6,6 +6,10 @@ namespace CompareGame
 {
     public class Compare_Game : MonoBehaviour
     {
+        private const int CARTRIDGE_CAPACITY = 4;
+        private const int MIXER_ITERATIONS = 10;
+
+
         public bool IsStarted => Cartridge != null;
         public bool Plate_Picked => PickedPlate != null;
         private ImagePlate PickedPlate;
@@ -21,9 +25,15 @@ namespace CompareGame
         [SerializeField] private Dispenser_Slot Dispenser_Slot;
 
         [SerializeField] private Button GetCartridge_Button;
-        [SerializeField] private Material Button_Image;
+        [SerializeField] private Material Get_Image;
 
+        [SerializeField] private Button Verify_Button;
+        [SerializeField] private Material Verify_Image;
+
+        /////
+        
         [SerializeField] private ObjectMover CartridgeMover;
+
         private ImageCartridge Cartridge;
 
         public System.Action Cartridge_Geted_Notification;
@@ -37,24 +47,34 @@ namespace CompareGame
             Start_Game();
         }
 
-        public void GetCartrige()
+        private void GetCartrige()
         {
             if (Cartridge == null)
                 throw new System.Exception("Cartridge is not seted!");
 
-            for (int i = 0; i < 4; i++)
+            Clear();
+        }
+
+        private void Clear()
+        {
+            if (Cartridge == null)
+                throw new System.Exception("Cartridge is not seted!");
+
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
                 Cartridge.ImagePlates[i].Grab -= OnImagePicked;
                 Cartridge.ImagePlates[i].UnGrab -= OnImageUnpicked;
+                Image_Slots[i].Clear();
                 Words[i].Set_Word("");
             }
 
-            if (Dispenser_Slot.State == Dispenser_Slot.Dispenser_Slot_State.Opend)
-                Dispenser_Slot.Close();
+            Dispenser_Slot.Close();
+            //Dispenser_Slot.CollectImages();
         }
 
         public void Start()
         {
+            Cartridge = null;
             _main_camera = Camera.main;
             PickedPlate = null;
             int count;
@@ -66,21 +86,31 @@ namespace CompareGame
             count = Image_Slots.Length;
 
             Dispenser_Slot.Init(count);
-            CartridgeMover.EndReaching_Notification += SetCartrige;
-            Cartridge = null;
-            GetCartridge_Button.ButtonClicked += delegate ()
-            {
-                if (Cartridge != null)
-                    GetCartrige();
-            };
-            GetCartridge_Button.Init(Button_Image);
-
             Dispenser_Slot.Closed += delegate ()
             {
                 Cartridge.CollectImages();
                 CartridgeMover.MoveBackvard_FromFinish(Cartridge.gameObject, true);
                 Cartridge = null;
                 Cartridge_Geted_Notification?.Invoke();
+            };
+
+            CartridgeMover.EndReaching_Notification += SetCartrige;
+
+            GetCartridge_Button.Init(Get_Image);
+            GetCartridge_Button.ButtonClicked += delegate ()
+            {
+                if (Cartridge != null)
+                    GetCartrige();
+            };
+
+
+            Verify_Button.Init(Verify_Image);
+            Verify_Button.ButtonClicked += delegate ()
+            {
+                if (VerifyGame())
+                {
+                    Clear();
+                }
             };
         }
 
@@ -102,6 +132,26 @@ namespace CompareGame
             }
         }
 
+        private bool VerifyGame()
+        {
+            bool all_is_correct = true;
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
+            {
+                if (Image_Slots[i].IsCorrect == false)
+                {
+                    all_is_correct = false;
+                    break;
+                }
+            }
+
+            if (all_is_correct)
+            {
+                Debug.Log("All is correct!");
+                return true;
+            }
+            return false;
+        }
+
         private void OnImagePicked(ImagePlate image)
         {
             PickedPlate = image;
@@ -120,7 +170,7 @@ namespace CompareGame
         private void ChaingeSlot(ImagePlate image)
         {
             ImageSlot nearest_slot = null;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
                 ImageSlot curent_slot = Image_Slots[i];
 
@@ -157,7 +207,7 @@ namespace CompareGame
         private void PlaceInSlot(ImagePlate image)
         {
             ImageSlot nearest_slot = null;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
                 ImageSlot curent_slot = Image_Slots[i];
                 if (curent_slot.IsSeted == false)
@@ -179,24 +229,26 @@ namespace CompareGame
         private void Start_Game()
         {
             Debug.Log($"Game Started: Level - {Cartridge.Level_Number} {Cartridge.Level_Title}");
-            for (int i = 3; i >=0; i--)
+            for (int i = CARTRIDGE_CAPACITY - 1; i >=0; i--)
             {
                 Cartridge.ImagePlates[i].Grab += OnImagePicked;
                 Cartridge.ImagePlates[i].UnGrab += OnImageUnpicked;
                 Dispenser_Slot.AddInQueue(Cartridge.ImagePlates[i]);
             }
             List<int> index_list = new List<int>();
-            index_list.AddRange(new int []{ 0, 1, 2, 3});
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
+                index_list.Add(i);
+
+            for (int i = 0; i < MIXER_ITERATIONS; i++)
             {
-                int i1 = Random.Range(0, 3);
-                int i2 = Random.Range(0, 3);
+                int i1 = Random.Range(0, CARTRIDGE_CAPACITY);
+                int i2 = Random.Range(0, CARTRIDGE_CAPACITY);
                 int temp = index_list[i1];
                 index_list[i1] = index_list[i2];
                 index_list[i2] = temp;
             }
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
                 Image_Slots[i].Set_CorrectImage(Cartridge.ImagePlates[index_list[i]]);
             }

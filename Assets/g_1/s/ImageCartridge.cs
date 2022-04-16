@@ -46,6 +46,7 @@ namespace CompareGame
             {
                 imagePlates[i].transform.SetParent(Plate_Pos[i].transform);
                 imagePlates[i].transform.localPosition = Vector3.zero;
+                imagePlates[i].CurentSlot = null;
             }
         }
     }
