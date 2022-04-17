@@ -66,6 +66,14 @@ namespace CompareGame
 
                 Plates[count++] = plate;
             }
+
+            public ImagePlate this[int i]
+            {
+                get
+                {
+                    return Plates[i];
+                }
+            }
         }
 
         public void Awake()
@@ -89,7 +97,6 @@ namespace CompareGame
                 State = Dispenser_State.Empty;
                 ImageMover.Get_Object();
                 CollectImages();
-
             };
         }
 
@@ -111,6 +118,19 @@ namespace CompareGame
 
         }
 
+        public bool IsImage_in_Queue(ImagePlate image)
+        {
+            if (image == CurentImage)
+                return true;
+
+            for (int i = 0; i < Queue.Count; i++)
+            {
+                if (image == Queue[i])
+                    return true;
+            }
+            return false;
+        }
+
         public void Close()
         {
             Queue.Clear();
@@ -120,7 +140,11 @@ namespace CompareGame
                 CollectImages();
             }
             else
+            {
+                CurentImage.Grab = new System.Action<ImagePlate>(CurentImage.Grab);
+                CurentImage.UnGrab = new System.Action<ImagePlate>(CurentImage.UnGrab);
                 ImageMover.MoveBackvard(true);
+            }
         }
 
         public void CollectImages()
@@ -147,7 +171,7 @@ namespace CompareGame
             State = Dispenser_State.Empty;
             ImageMover.Get_Object();
             CurentImage.Grab -= OnGrab;
-             CurentImage = null;
+            CurentImage = null;
         }
 
         private void OnGrab(ImagePlate image)
@@ -160,7 +184,7 @@ namespace CompareGame
 
         private void TryDispensImage()
         {
-            if (Queue.Count == 0)
+            if (Queue.Count == 0 || CurentImage != null)
                 return;
 
             CurentImage = Queue.Get();

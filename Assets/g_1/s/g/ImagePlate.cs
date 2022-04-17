@@ -10,9 +10,13 @@ namespace CompareGame
         public System.Action<ImagePlate> UnGrab;
         public ImageSlot CurentSlot;
         public string Text;
+
+        [SerializeField] private BoxCollider Collider;
+
         private bool _grabed;
 
-        public bool CanGrab;
+
+        public bool CanGrab { get => Collider.enabled; set => Collider.enabled = value; }
 
         private void Awake()
         {
@@ -20,6 +24,12 @@ namespace CompareGame
             _grabed = false;
             CurentSlot = null;
         }
+
+        public void Clear()
+        {
+            Grab = new System.Action<ImagePlate>(Grab);
+            UnGrab = new System.Action<ImagePlate>(UnGrab);
+        }    
 
         private void FixedUpdate()
         {

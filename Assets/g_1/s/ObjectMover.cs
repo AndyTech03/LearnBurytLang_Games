@@ -118,6 +118,18 @@ public class ObjectMover : MonoBehaviour
         Status = MoveStatus.NoTarget;
     }
 
+    private Vector3 Validate_Angles(Quaternion rotation)
+    {
+        Vector3 angles = rotation.eulerAngles;
+        if (angles.x > 180)
+            angles.x -= 360;
+        if (angles.y > 180)
+            angles.y -= 360;
+        if (angles.z > 180)
+            angles.z -= 360;
+        return angles;
+    }
+
     private void MoveToNode(int index1, int index2)
     {
         Vector3 pos1 = Path_Points[index1].transform.position;
@@ -128,14 +140,13 @@ public class ObjectMover : MonoBehaviour
         Vector3 point = pos1 + absolute_deltaMove * evoluation;
         TargetObject.transform.position = point;
 
-        Vector3 rotation1 = Path_Points[index1].transform.rotation.eulerAngles;
-        Vector3 rotation2 = Path_Points[index2].transform.rotation.eulerAngles;
+        Vector3 rotation1 = Validate_Angles(Path_Points[index1].transform.rotation);
+        Vector3 rotation2 = Validate_Angles(Path_Points[index2].transform.rotation);
         Vector3 absolute_deltaRotation = rotation2 - rotation1;
         float rotate_value_delta = RotateCurve.keys[index2].value - RotateCurve.keys[index1].value;
         evoluation = (RotateCurve.Evaluate(_progress) - RotateCurve.keys[index1].value) / rotate_value_delta;
         Vector3 euler = rotation1 + absolute_deltaRotation * evoluation;
         TargetObject.transform.rotation = Quaternion.Euler(euler);
-
     }
 
     private void FixedUpdate()

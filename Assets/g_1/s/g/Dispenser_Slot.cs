@@ -24,6 +24,8 @@ namespace CompareGame
         }
 
         public System.Action CollectImages => Dispenser.CollectImages;
+        public delegate bool ImageCheck(ImagePlate image);
+        public ImageCheck IsInQueue => Dispenser.IsImage_in_Queue;
 
         public void Awake()
         {

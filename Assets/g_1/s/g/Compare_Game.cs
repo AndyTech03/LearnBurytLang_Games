@@ -35,6 +35,8 @@ namespace CompareGame
         [SerializeField] private ObjectMover CartridgeMover;
 
         private ImageCartridge Cartridge;
+        private int _collecting_cartridges_count;
+        private bool _get_cartridge_after_collect;
 
         public System.Action Cartridge_Geted_Notification;
 
@@ -49,43 +51,68 @@ namespace CompareGame
 
         private void GetCartrige()
         {
+            _get_cartridge_after_collect = true;
             if (Cartridge == null)
                 throw new System.Exception("Cartridge is not seted!");
 
-            Clear();
+            Clear_ImageSlots();
         }
 
-        private void Clear()
+        private void Clear_ImageSlots()
         {
             if (Cartridge == null)
                 throw new System.Exception("Cartridge is not seted!");
-
+            _collecting_cartridges_count = 0;
             for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
-                Cartridge.ImagePlates[i].Grab -= OnImagePicked;
-                Cartridge.ImagePlates[i].UnGrab -= OnImageUnpicked;
-                Image_Slots[i].Clear();
-                Words[i].Set_Word("");
+                if (Image_Slots[i].CollectImage())
+                {
+                    _collecting_cartridges_count++;
+                }
             }
+            if (_collecting_cartridges_count == 0)
+                Randomize_CorrectImage();
+        }
 
-            Dispenser_Slot.Close();
-            //Dispenser_Slot.CollectImages();
+        private void OnImage_Collected()
+        {
+            if (--_collecting_cartridges_count <= 0)
+            {
+                if (_get_cartridge_after_collect)
+                    Dispenser_Slot.Close();
+                else
+                {
+                    for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
+                    {
+                        ImagePlate image = Cartridge.ImagePlates[i];
+                        if (Dispenser_Slot.IsInQueue(image) == false)
+                        {
+                            Cartridge.CollectImage(i);
+                            Dispenser_Slot.AddInQueue(image);
+                        }
+                    }
+                    Randomize_CorrectImage();
+                }
+
+            }
         }
 
         public void Start()
         {
+            if (Words.Length != CARTRIDGE_CAPACITY || Image_Slots.Length != CARTRIDGE_CAPACITY)
+                throw new System.Exception("Wrong count!");
+
             Cartridge = null;
             _main_camera = Camera.main;
             PickedPlate = null;
-            int count;
-            for (int i = 0; i < Words.Length; i++)
+
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
-                Words[i].Init(Reel_Prefab, Сover_Prefab);
+                Image_Slots[i].Init(Reel_Prefab, Сover_Prefab, OnImage_Collected);
             }
 
-            count = Image_Slots.Length;
 
-            Dispenser_Slot.Init(count);
+            Dispenser_Slot.Init(CARTRIDGE_CAPACITY);
             Dispenser_Slot.Closed += delegate ()
             {
                 Cartridge.CollectImages();
@@ -103,14 +130,19 @@ namespace CompareGame
                     GetCartrige();
             };
 
-
             Verify_Button.Init(Verify_Image);
             Verify_Button.ButtonClicked += delegate ()
             {
-                if (VerifyGame())
-                {
-                    Clear();
-                }
+                if (Cartridge != null)
+                    if (VerifyGame())
+                    {
+                        GetCartrige();
+                    }
+                    else
+                    {
+                        _get_cartridge_after_collect = false;
+                        Clear_ImageSlots();
+                    }
             };
         }
 
@@ -226,15 +258,8 @@ namespace CompareGame
             nearest_slot.SetImage(image);
         }
 
-        private void Start_Game()
+        private void Randomize_CorrectImage()
         {
-            Debug.Log($"Game Started: Level - {Cartridge.Level_Number} {Cartridge.Level_Title}");
-            for (int i = CARTRIDGE_CAPACITY - 1; i >=0; i--)
-            {
-                Cartridge.ImagePlates[i].Grab += OnImagePicked;
-                Cartridge.ImagePlates[i].UnGrab += OnImageUnpicked;
-                Dispenser_Slot.AddInQueue(Cartridge.ImagePlates[i]);
-            }
             List<int> index_list = new List<int>();
             for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
                 index_list.Add(i);
@@ -247,11 +272,22 @@ namespace CompareGame
                 index_list[i1] = index_list[i2];
                 index_list[i2] = temp;
             }
-
             for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
                 Image_Slots[i].Set_CorrectImage(Cartridge.ImagePlates[index_list[i]]);
             }
+        }
+
+        private void Start_Game()
+        {
+            Debug.Log($"Game Started: Level - {Cartridge.Level_Number} {Cartridge.Level_Title}");
+            for (int i = CARTRIDGE_CAPACITY - 1; i >=0; i--)
+            {
+                Cartridge.ImagePlates[i].Grab += OnImagePicked;
+                Cartridge.ImagePlates[i].UnGrab += OnImageUnpicked;
+                Dispenser_Slot.AddInQueue(Cartridge.ImagePlates[i]);
+            }
+            Randomize_CorrectImage();
             Dispenser_Slot.Open();
         }
     }
