@@ -94,7 +94,6 @@ namespace CompareGame
             };
             ImageMover.StartReaching_Notification += delegate ()
             {
-                State = Dispenser_State.Empty;
                 ImageMover.Get_Object();
                 CollectImages();
             };
@@ -136,19 +135,18 @@ namespace CompareGame
             Queue.Clear();
             if (CurentImage == null)
             {
-                State = Dispenser_State.Empty;
                 CollectImages();
             }
             else
             {
-                CurentImage.Grab = new System.Action<ImagePlate>(CurentImage.Grab);
-                CurentImage.UnGrab = new System.Action<ImagePlate>(CurentImage.UnGrab);
                 ImageMover.MoveBackvard(true);
             }
         }
 
         public void CollectImages()
         {
+            CurentImage = null;
+            State = Dispenser_State.Empty;
             ImagesColected?.Invoke();
         }
 
@@ -170,14 +168,14 @@ namespace CompareGame
 
             State = Dispenser_State.Empty;
             ImageMover.Get_Object();
-            CurentImage.Grab -= OnGrab;
             CurentImage = null;
         }
 
-        private void OnGrab(ImagePlate image)
+        private void OnGrab(object obj, System.EventArgs _)
         {
             if (State == Dispenser_State.Idle)
             {
+                CurentImage.Grab -= OnGrab;
                 OnImage_Picked();
             }
         }

@@ -7,7 +7,6 @@ public class ObjectMover : MonoBehaviour
 {
     [SerializeField] private GameObject[] Path_Points;
     [SerializeField] private AnimationCurve MoveCurve;
-    [SerializeField] private AnimationCurve RotateCurve;
 
     [NonReorderable] private GameObject TargetObject;
     private MoveStatus Status;
@@ -103,14 +102,8 @@ public class ObjectMover : MonoBehaviour
     {
         _lenght = Path_Points.Length;
 
-        if (_lenght != RotateCurve.keys.Length || _lenght != MoveCurve.keys.Length)
-            throw new Exception($"Wrong configs! (lenght) {gameObject.name} {_lenght} {RotateCurve.keys.Length} {MoveCurve.keys.Length}");
-
-        if (RotateCurve.keys[_lenght - 1].value != MoveCurve.keys[_lenght - 1].value)
-            throw new Exception("Wrong configs! (value)" + gameObject.name);
-
-        if (RotateCurve.keys[_lenght - 1].time != MoveCurve.keys[_lenght - 1].time)
-            throw new Exception("Wrong configs! (time)" + gameObject.name);
+        if (_lenght != MoveCurve.keys.Length)
+            throw new Exception($"Wrong configs! (lenght) {gameObject.name} {_lenght} {MoveCurve.keys.Length}");
 
         PathNodes = new LinkedList<int>();
         for (int i = 0; i < _lenght; i++)
@@ -143,8 +136,7 @@ public class ObjectMover : MonoBehaviour
         Vector3 rotation1 = Validate_Angles(Path_Points[index1].transform.rotation);
         Vector3 rotation2 = Validate_Angles(Path_Points[index2].transform.rotation);
         Vector3 absolute_deltaRotation = rotation2 - rotation1;
-        float rotate_value_delta = RotateCurve.keys[index2].value - RotateCurve.keys[index1].value;
-        evoluation = (RotateCurve.Evaluate(_progress) - RotateCurve.keys[index1].value) / rotate_value_delta;
+        evoluation = (MoveCurve.Evaluate(_progress) - MoveCurve.keys[index1].value) / move_value_delta;
         Vector3 euler = rotation1 + absolute_deltaRotation * evoluation;
         TargetObject.transform.rotation = Quaternion.Euler(euler);
     }

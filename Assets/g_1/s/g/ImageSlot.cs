@@ -87,6 +87,7 @@ namespace CompareGame
                 OpenLuke();
                 return true;
             }
+            Clear();
             return false;
         }
 

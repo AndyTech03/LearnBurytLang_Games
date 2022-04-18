@@ -32,34 +32,24 @@ public class Camera_Mover : MonoBehaviour
 
     public void Zoom_In()
     {
-        Vector3 pos;
         if (Game.IsStarted == false || Game.Plate_Picked)
         {
-            pos = Camera_LevelSelectPos.transform.localPosition;
-            pos.y -= 4;
-            Camera_LevelSelectPos.transform.localPosition = pos;
+            Camera_LevelSelectPos.transform.localPosition += Camera_Object.transform.forward * 4;
         }
         else
         {
-            pos = Camera_GamePos.transform.localPosition;
-            pos.y -= 4;
-            Camera_GamePos.transform.localPosition = pos;
+            Camera_GamePos.transform.localPosition += Camera_Object.transform.forward * 4;
         }
     }
     public void Zoom_Out()
     {
-        Vector3 pos;
         if (Game.IsStarted == false || Game.Plate_Picked)
         {
-            pos = Camera_LevelSelectPos.transform.localPosition;
-            pos.y += 4;
-            Camera_LevelSelectPos.transform.localPosition = pos;
+            Camera_LevelSelectPos.transform.localPosition += Camera_Object.transform.forward * -4;
         }
         else
         {
-            pos = Camera_GamePos.transform.localPosition;
-            pos.y += 4;
-            Camera_GamePos.transform.localPosition = pos;
+            Camera_GamePos.transform.localPosition += Camera_Object.transform.forward * -4;
         }
     }
 

@@ -11,6 +11,7 @@ namespace CompareGame
         [SerializeField] private TMP_Text Main_Char;
         [SerializeField] private TMP_Text[] Fake_Chars_After;
 
+        private char _target_char = ' ';
         private bool is_rotating = false;
         private char next_char = ' ';
         private Quaternion default_rotation;
@@ -85,9 +86,20 @@ namespace CompareGame
                 Rotate();
         }
 
+        private void Fast_Stop(char c)
+        {
+            Set_Char(c);
+            is_rotating = false;
+        }
+
         public void RotateToChar(char c)
         {
-            next_char = c;
+            if (c == _target_char)
+                return;
+
+            Fast_Stop(_target_char);
+
+            _target_char = next_char = c;
             curent_index = Buryat_Lang.IndexOf(curent_char);
             end_index = Buryat_Lang.IndexOf(next_char);
             rotation_speed = 45 / rotation_speed_modifer * (curent_index > end_index ? 1 : -1);

@@ -48,12 +48,20 @@ namespace CompareGame
             }
         }
 
+        public void Undock()
+        {
+            for (int i = 0; i < Images.Length; i++)
+            {
+                imagePlates[i].Clear();
+            }
+        }
+
         public void CollectImage(int index)
         {
             imagePlates[index].transform.SetParent(Plate_Pos[index].transform);
             imagePlates[index].transform.localPosition = Vector3.zero;
             imagePlates[index].CurentSlot = null;
-            imagePlates[index].Clear();
+            imagePlates[index].CanGrab = false;
         }
     }
 }

@@ -1,13 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace CompareGame
 {
     public class ImagePlate : MonoBehaviour, IEqualityComparer
     {
-        public System.Action<ImagePlate> Grab;
-        public System.Action<ImagePlate> UnGrab;
+        private List<EventHandler> _grab_delegates;
+        private event EventHandler _grab;
+        private List<EventHandler> _ungrab_delegates;
+        private event EventHandler _ungrab;
+        public event EventHandler Grab
+        {
+            add
+            {
+                _grab += value;
+                _grab_delegates.Add(value);
+            }
+            remove
+            {
+                _grab -= value;
+                _grab_delegates.Remove(value);
+            }
+        }
+        public event EventHandler UnGrab
+        {
+            add
+            {
+                _ungrab += value;
+                _grab_delegates.Add(value);
+            }
+            remove
+            {
+                _ungrab -= value;
+                _grab_delegates.Remove(value);
+            }
+        }
+
         public ImageSlot CurentSlot;
         public string Text;
 
@@ -20,6 +50,8 @@ namespace CompareGame
 
         private void Awake()
         {
+            _grab_delegates = new List<EventHandler>();
+            _ungrab_delegates = new List<EventHandler>();
             CanGrab = false;
             _grabed = false;
             CurentSlot = null;
@@ -27,9 +59,19 @@ namespace CompareGame
 
         public void Clear()
         {
-            Grab = new System.Action<ImagePlate>(Grab);
-            UnGrab = new System.Action<ImagePlate>(UnGrab);
-        }    
+            foreach (EventHandler eh in _grab_delegates)
+            {
+                _grab -= eh;
+            }
+            _grab_delegates.Clear();
+
+            foreach (EventHandler eh in _ungrab_delegates)
+            {
+                _ungrab -= eh;
+            }
+            _ungrab_delegates.Clear();
+            CanGrab = false;
+        }
 
         private void FixedUpdate()
         {
@@ -38,7 +80,7 @@ namespace CompareGame
                 if (Input.GetMouseButton(0) == false)
                 {
                     _grabed = false;
-                    UnGrab?.Invoke(this);
+                    _ungrab?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -48,7 +90,7 @@ namespace CompareGame
             if (CanGrab)
             {
                 _grabed = true;
-                Grab?.Invoke(this);
+                _grab?.Invoke(this, EventArgs.Empty);
             }
         }
 

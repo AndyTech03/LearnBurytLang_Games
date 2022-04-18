@@ -51,17 +51,26 @@ namespace CompareGame
 
         private void GetCartrige()
         {
-            _get_cartridge_after_collect = true;
             if (Cartridge == null)
                 throw new System.Exception("Cartridge is not seted!");
 
+            _get_cartridge_after_collect = true;
             Clear_ImageSlots();
+        }
+
+        private void ReturnCartridge()
+        {
+            for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
+                Image_Slots[i].Clear();
+            Cartridge.Undock();
+            Dispenser_Slot.Close();
         }
 
         private void Clear_ImageSlots()
         {
             if (Cartridge == null)
                 throw new System.Exception("Cartridge is not seted!");
+
             _collecting_cartridges_count = 0;
             for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
             {
@@ -70,16 +79,21 @@ namespace CompareGame
                     _collecting_cartridges_count++;
                 }
             }
+            
             if (_collecting_cartridges_count == 0)
-                Randomize_CorrectImage();
+                if (_get_cartridge_after_collect)
+                    ReturnCartridge();
+                else
+                    Invoke(nameof(Randomize_CorrectImage), .1f);
+
         }
 
         private void OnImage_Collected()
         {
             if (--_collecting_cartridges_count <= 0)
             {
-                if (_get_cartridge_after_collect)
-                    Dispenser_Slot.Close();
+                if (_get_cartridge_after_collect) 
+                    ReturnCartridge();
                 else
                 {
                     for (int i = 0; i < CARTRIDGE_CAPACITY; i++)
@@ -91,7 +105,7 @@ namespace CompareGame
                             Dispenser_Slot.AddInQueue(image);
                         }
                     }
-                    Randomize_CorrectImage();
+                    Invoke(nameof(Randomize_CorrectImage), .1f);
                 }
 
             }
@@ -123,14 +137,14 @@ namespace CompareGame
 
             CartridgeMover.EndReaching_Notification += SetCartrige;
 
-            GetCartridge_Button.Init(Get_Image);
+            GetCartridge_Button.Init(Get_Image, false);
             GetCartridge_Button.ButtonClicked += delegate ()
             {
                 if (Cartridge != null)
                     GetCartrige();
             };
 
-            Verify_Button.Init(Verify_Image);
+            Verify_Button.Init(Verify_Image, false);
             Verify_Button.ButtonClicked += delegate ()
             {
                 if (Cartridge != null)
@@ -184,19 +198,25 @@ namespace CompareGame
             return false;
         }
 
-        private void OnImagePicked(ImagePlate image)
+        private void OnImagePicked(object obj, System.EventArgs _)
         {
-            PickedPlate = image;
-            PickedPlate.transform.SetParent(transform);
+            if (obj is ImagePlate image)
+            {
+                PickedPlate = image;
+                PickedPlate.transform.SetParent(transform);
+            }
         }
 
-        private void OnImageUnpicked(ImagePlate image)
+        private void OnImageUnpicked(object obj, System.EventArgs _)
         {
-            PickedPlate = null;
-            if (image.CurentSlot == null)
-                PlaceInSlot(image);
-            else
-                ChaingeSlot(image);
+            if (obj is ImagePlate image)
+            {
+                PickedPlate = null;
+                if (image.CurentSlot == null)
+                    PlaceInSlot(image);
+                else
+                    ChaingeSlot(image);
+            }
         }
 
         private void ChaingeSlot(ImagePlate image)
@@ -258,6 +278,10 @@ namespace CompareGame
             nearest_slot.SetImage(image);
         }
 
+        /// <summary>
+        /// Use sintax like this:
+        /// <code>Invoke(nameof(Randomize_CorrectImage), .1f);</code>
+        /// </summary>
         private void Randomize_CorrectImage()
         {
             List<int> index_list = new List<int>();
@@ -287,7 +311,7 @@ namespace CompareGame
                 Cartridge.ImagePlates[i].UnGrab += OnImageUnpicked;
                 Dispenser_Slot.AddInQueue(Cartridge.ImagePlates[i]);
             }
-            Randomize_CorrectImage();
+            Invoke(nameof(Randomize_CorrectImage), .1f);
             Dispenser_Slot.Open();
         }
     }

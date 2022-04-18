@@ -10,18 +10,20 @@ public class Button : MonoBehaviour
     [SerializeField] private GameObject MovingPart;
     public System.Action ButtonClicked;
     private bool _isPushed;
+    private bool _repiat_mode;
 
-    public void Init(Material logo_image)
+    public void Init(Material logo_image, bool repiat_mode = true)
     {
         GetComponentInChildren<Renderer>().materials = new Material[] { logo_image, Back_Image, Back_Image };
         PushMover.SetOnStart(MovingPart);
         PushMover.EndReaching_Notification += OnPushed;
+        _repiat_mode = repiat_mode;
         _isPushed = false;
     }
 
     private void FixedUpdate()
     {
-        if (_isPushed)
+        if (_isPushed && _repiat_mode)
             ButtonClicked?.Invoke();
     }
 
@@ -38,6 +40,7 @@ public class Button : MonoBehaviour
     private void OnPushed()
     {
         _isPushed = true;
+        ButtonClicked?.Invoke();
     }
 
     private void OnMouseExit()
