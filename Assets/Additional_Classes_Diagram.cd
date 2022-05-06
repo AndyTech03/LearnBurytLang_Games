@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Camera_Mover">
+    <Position X="4.25" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAggQAAiAAQAAEAAAAEAAAEEgAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Camera_Mover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectMover">
+    <Position X="7.5" Y="0.5" Width="4.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="ObjectMover.Node&lt;T&gt;">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\g_1\s\ObjectMover.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ObjectMover.LinkedList&lt;T&gt;">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\g_1\s\ObjectMover.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+      <Enum Name="ObjectMover.MoveStatus">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\g_1\s\ObjectMover.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAKBIAIEAggQAAAwQIIAARABIBBIACAAIEAAAAEIAEA=</HashCode>
+      <FileName>Assets\g_1\s\ObjectMover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CompareGame.ImageCartridge">
+    <Position X="4.25" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>kAEAEAAABCCAABEQCQAQAAgAAAAAABAAAAgCAAAAAAA=</HashCode>
+      <FileName>Assets\g_1\s\ImageCartridge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Button">
+    <Position X="4.25" Y="9.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAABAAAAAAAAAAAFAAIAAAEIAACQAACAgQ=</HashCode>
+      <FileName>Assets\g_1\s\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
