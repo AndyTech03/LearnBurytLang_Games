@@ -3,8 +3,8 @@
   <Class Name="Camera_Mover">
     <Position X="4.25" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAggQAAiAAQAAEAAAAEAAAEEgAAAAAAAAACAAAAAA=</HashCode>
-      <FileName>Assets\Camera_Mover.cs</FileName>
+      <HashCode>CAAAggQAAiAAQAAEAAAAEAAEEEkAAAAAgAAACAAAAAA=</HashCode>
+      <FileName>Assets\Resuorce\Camera_Mover.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ObjectMover">
@@ -36,17 +36,56 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CompareGame.ImageCartridge">
-    <Position X="4.25" Y="4.5" Width="3" />
+    <Position X="4.25" Y="5.25" Width="3" />
     <TypeIdentifier>
       <HashCode>kAEAEAAABCCAABEQCQAQAAgAAAAAABAAAAgCAAAAAAA=</HashCode>
       <FileName>Assets\g_1\s\ImageCartridge.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Button">
-    <Position X="4.25" Y="9.5" Width="3" />
+    <Position X="4.25" Y="10.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAABAAAAAAAAAAAFAAIAAAEIAACQAACAgQ=</HashCode>
       <FileName>Assets\g_1\s\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataManager">
+    <Position X="12.25" Y="0.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="DataManager.LevelProgress_Data">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Resuorce\DataManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="DataManager.Settings_Data">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Resuorce\DataManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAgIAAIAAAAEAAAAAAAAgAIAIAIAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Resuorce\DataManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Settings_Menu">
+    <Position X="12.25" Y="7" Width="3" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Settings_Menu.Menu_State">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Resuorce\Settings_Menu.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgQIAAAiAAAACAAAAACAEAAQAAAEoAAAJAJACAQAA=</HashCode>
+      <FileName>Assets\Resuorce\Settings_Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

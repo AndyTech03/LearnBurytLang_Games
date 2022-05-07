@@ -109,6 +109,7 @@ namespace CompareGame
             OutputMover.StartReaching_Notification += delegate ()
             {
                 Cartrige_Geted = false;
+                Displays.SetLevel(Cartridges[0]);
                 OutputMover.Get_Object();
             };
 

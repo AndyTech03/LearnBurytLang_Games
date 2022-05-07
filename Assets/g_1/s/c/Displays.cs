@@ -43,10 +43,30 @@ namespace CompareGame
             {
                 MiniDisplays[_curent_level].Is_Hightlighted = false;
             }
-
             _curent_level = cartridge.Level_Number;
+
+            DataManager.LevelProgress_Data level_data = DataManager.Get_LevelsProgress_Data()[_curent_level];
+            string progress = "";
+            if (level_data.Complited)
+            {
+                int miliseconds = level_data.Time % 100;
+                level_data.Time /= 100;
+                int seconds = level_data.Time % 60;
+                level_data.Time /= 60;
+                int minutes = level_data.Time % 60;
+                level_data.Time /= 60;
+                int hours = level_data.Time;
+                progress = "Уровень пройден.\nЛучшее время: " +
+                    $"{(hours == 0 ? "" : $"{hours}:")}" +
+                    $"{(hours == 0 && minutes == 0 ? "" : $"{minutes}:")}" +
+                    $"{(hours == 0 && minutes == 0 && seconds == 0 ? "" : $"{seconds}:")}" +
+                    $"{miliseconds}";
+            }
+            else
+                progress = "Уровень ещё не пройден.";
             MiniDisplays[_curent_level].Is_Hightlighted = true;
             LargeDisplay.SetText(cartridge.Level_Title + '\n' + cartridge.Level_Description);
+            MediumDisplay.SetText(progress);
         }
     }
 }

@@ -33,6 +33,7 @@ namespace CompareGame
         /////
         
         [SerializeField] private ObjectMover CartridgeMover;
+        private ushort _game_time;
 
         private ImageCartridge Cartridge;
         private int _collecting_cartridges_count;
@@ -150,6 +151,10 @@ namespace CompareGame
                 if (Cartridge != null)
                     if (VerifyGame())
                     {
+                        Debug.Log(_game_time);
+                        DataManager.LevelProgress_Data data = DataManager.Get_LevelsProgress_Data()[Cartridge.Level_Number];
+                        if (data.Complited == false || data.Time < _game_time )
+                            DataManager.Save_ComplitedLevelProgress_Data(Cartridge.Level_Number, _game_time);
                         GetCartrige();
                     }
                     else
@@ -158,6 +163,12 @@ namespace CompareGame
                         Clear_ImageSlots();
                     }
             };
+        }
+
+        private void Update()
+        {
+            if (Cartridge != null)
+                _game_time += (ushort)(Time.deltaTime * 100);
         }
 
         private void FixedUpdate()
@@ -305,6 +316,7 @@ namespace CompareGame
         private void Start_Game()
         {
             Debug.Log($"Game Started: Level - {Cartridge.Level_Number} {Cartridge.Level_Title}");
+            _game_time = 0;
             for (int i = CARTRIDGE_CAPACITY - 1; i >=0; i--)
             {
                 Cartridge.ImagePlates[i].Grab += OnImagePicked;
