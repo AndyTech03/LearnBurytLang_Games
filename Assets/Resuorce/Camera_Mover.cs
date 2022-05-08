@@ -40,6 +40,7 @@ public class Camera_Mover : MonoBehaviour
         DataManager.Settings_Data data = DataManager.Get_Settings_Data();
         Zoom_Speed = data.Zoom_Speed;
         Scroll_Sensitivity = data.Scroll_Sensitivity;
+        QualitySettings.SetQualityLevel(data.Quality_Level);
     }
 
     public void Zoom_In()

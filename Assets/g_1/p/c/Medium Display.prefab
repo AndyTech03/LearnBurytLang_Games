@@ -108,8 +108,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281274541
+  m_fontColor: {r: 0.6784314, g: 0.0627451, b: 0.18431373, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -355,6 +355,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 13b6b1e44667e76479fbf9b913b3196e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dbbeb4d51fe1d4b47a0d8b789b321ed1, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 13b6b1e44667e76479fbf9b913b3196e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 037c6ace9055ad84bba215b25352035b, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 13b6b1e44667e76479fbf9b913b3196e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78bbe1e59f28ef14d95e03b462f7a9e4, type: 2}
     - target: {fileID: 919132149155446097, guid: 13b6b1e44667e76479fbf9b913b3196e,
         type: 3}
       propertyPath: m_Name

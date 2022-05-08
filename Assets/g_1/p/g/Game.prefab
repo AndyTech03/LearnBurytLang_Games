@@ -373,9 +373,9 @@ MonoBehaviour:
   - {fileID: 5573282119613869108}
   Dispenser_Slot: {fileID: 523563867391441252}
   GetCartridge_Button: {fileID: 5361525078758618596}
-  Get_Image: {fileID: 2100000, guid: 2c6335713b10d5f41a1806cd3d72338f, type: 2}
+  Get_Image: {fileID: 2100000, guid: b61594afd83eee74eb6148a798d71709, type: 2}
   Verify_Button: {fileID: 3944981214314171197}
-  Verify_Image: {fileID: 2100000, guid: 78bbe1e59f28ef14d95e03b462f7a9e4, type: 2}
+  Verify_Image: {fileID: 2100000, guid: 1fd366229d1c24842a58a455c666ea7a, type: 2}
   CartridgeMover: {fileID: 0}
 --- !u!1 &6795235349734048675
 GameObject:
@@ -444,6 +444,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3474362754732610740}
     m_Modifications:
+    - target: {fileID: 3798685505299195189, guid: 13cad78723d75214ba71159682d80516,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f25491c62fb4cd24daba427192d3a79f, type: 2}
     - target: {fileID: 4552649628763883947, guid: 13cad78723d75214ba71159682d80516,
         type: 3}
       propertyPath: m_Name
@@ -844,6 +849,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1831281755980459268}
     m_Modifications:
+    - target: {fileID: 5025948249574389703, guid: 202dcde1b8adb064f991d76d0e88b12f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c78a995937d2ba4a97f3639e4b8ee5a, type: 2}
     - target: {fileID: 7226336347634518388, guid: 202dcde1b8adb064f991d76d0e88b12f,
         type: 3}
       propertyPath: m_Name
@@ -1048,30 +1058,6 @@ MonoBehaviour:
   - {fileID: 2808472209183200173}
   - {fileID: 4101921155189332569}
   MoveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RotateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1380,30 +1366,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RotateCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &6369165368347765198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,30 +1399,6 @@ MonoBehaviour:
   - {fileID: 2927404859607338234}
   - {fileID: 6795235349734048675}
   MoveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RotateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1798,30 +1736,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RotateCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &7421193227646018774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1855,30 +1769,6 @@ MonoBehaviour:
   - {fileID: 6148111002434222772}
   - {fileID: 388638596756632869}
   MoveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RotateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -2283,6 +2173,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 039966c7ffb41a448b477efbafc14902,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b569ef31fc5e8c243873f0ec612c8898, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 039966c7ffb41a448b477efbafc14902,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 375f544aeff4b9146876620157997b8f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 039966c7ffb41a448b477efbafc14902,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6c1e027f187542458a8b939799df846, type: 2}
     - target: {fileID: 919132149155446097, guid: 039966c7ffb41a448b477efbafc14902,
         type: 3}
       propertyPath: m_Name
@@ -2303,6 +2208,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1029096915173840406}
     m_Modifications:
+    - target: {fileID: 138972402901092489, guid: f9ab9abc16262104f84b13dd46dfdfc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 06b7313b1821b5c459aca1b9b471e3d2, type: 2}
     - target: {fileID: 7099770932503861394, guid: f9ab9abc16262104f84b13dd46dfdfc1,
         type: 3}
       propertyPath: m_Name
@@ -2326,7 +2236,7 @@ PrefabInstance:
     - target: {fileID: 7623649278887002664, guid: f9ab9abc16262104f84b13dd46dfdfc1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 7623649278887002664, guid: f9ab9abc16262104f84b13dd46dfdfc1,
         type: 3}
@@ -2540,30 +2450,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RotateCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &2162653081861269824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,30 +2466,6 @@ MonoBehaviour:
   - {fileID: 7983596634873241983}
   - {fileID: 3916368083091063633}
   MoveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RotateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -2970,6 +2832,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7178014008465320801}
     m_Modifications:
+    - target: {fileID: 138972402901092489, guid: f9ab9abc16262104f84b13dd46dfdfc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 06b7313b1821b5c459aca1b9b471e3d2, type: 2}
     - target: {fileID: 7099770932503861394, guid: f9ab9abc16262104f84b13dd46dfdfc1,
         type: 3}
       propertyPath: m_Name
@@ -3207,30 +3074,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RotateCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &3642467844567323598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3247,30 +3090,6 @@ MonoBehaviour:
   - {fileID: 7282140175405578494}
   - {fileID: 1970638897574104010}
   MoveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 3.3333333
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RotateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -3318,6 +3137,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 274026329530943487}
     m_Modifications:
+    - target: {fileID: 138972402901092489, guid: f9ab9abc16262104f84b13dd46dfdfc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 06b7313b1821b5c459aca1b9b471e3d2, type: 2}
     - target: {fileID: 7099770932503861394, guid: f9ab9abc16262104f84b13dd46dfdfc1,
         type: 3}
       propertyPath: m_Name
@@ -3793,6 +3617,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7075666391880640691}
     m_Modifications:
+    - target: {fileID: 3798685505299195189, guid: 13cad78723d75214ba71159682d80516,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f25491c62fb4cd24daba427192d3a79f, type: 2}
     - target: {fileID: 4552649628763883947, guid: 13cad78723d75214ba71159682d80516,
         type: 3}
       propertyPath: m_Name
@@ -3816,7 +3645,7 @@ PrefabInstance:
     - target: {fileID: 7277721001784103677, guid: 13cad78723d75214ba71159682d80516,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 7277721001784103677, guid: 13cad78723d75214ba71159682d80516,
         type: 3}
@@ -3874,6 +3703,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 970108683971280906}
     m_Modifications:
+    - target: {fileID: 138972402901092489, guid: f9ab9abc16262104f84b13dd46dfdfc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 06b7313b1821b5c459aca1b9b471e3d2, type: 2}
     - target: {fileID: 7099770932503861394, guid: f9ab9abc16262104f84b13dd46dfdfc1,
         type: 3}
       propertyPath: m_Name

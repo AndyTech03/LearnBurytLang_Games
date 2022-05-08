@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 7688882822142803784}
   Hightlighted_Image: {fileID: 2100000, guid: 78bbe1e59f28ef14d95e03b462f7a9e4, type: 2}
-  Default_Image: {fileID: 2100000, guid: f9b0f58acce954e4f8ad0b1fde6e20c7, type: 2}
+  Default_Image: {fileID: 2100000, guid: dbbeb4d51fe1d4b47a0d8b789b321ed1, type: 2}
   Border_Image: {fileID: 2100000, guid: 037c6ace9055ad84bba215b25352035b, type: 2}
   Base_Image: {fileID: 2100000, guid: f9b0f58acce954e4f8ad0b1fde6e20c7, type: 2}
   Self_Renderer: {fileID: 2734554759042527233}
@@ -158,8 +158,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281274541
+  m_fontColor: {r: 0.6784314, g: 0.0627451, b: 0.18431373, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -283,6 +283,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 38dc11f3660f04c4eb41a32715bd9a91,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dbbeb4d51fe1d4b47a0d8b789b321ed1, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 38dc11f3660f04c4eb41a32715bd9a91,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 037c6ace9055ad84bba215b25352035b, type: 2}
     - target: {fileID: 919132149155446097, guid: 38dc11f3660f04c4eb41a32715bd9a91,
         type: 3}
       propertyPath: m_Name

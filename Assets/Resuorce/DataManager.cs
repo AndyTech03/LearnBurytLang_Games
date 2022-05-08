@@ -18,6 +18,7 @@ static class DataManager
     {
         public byte Zoom_Speed;
         public byte Scroll_Sensitivity;
+        public byte Quality_Level;
     }
 
     private static Settings_Data Init_Settings_Data()
@@ -25,6 +26,7 @@ static class DataManager
         Settings_Data data = new Settings_Data();
         data.Scroll_Sensitivity = 20;
         data.Zoom_Speed = 4;
+        data.Quality_Level = (byte)QualityLevel.Good;
         Write_Data(data);
         return data;
     }
@@ -34,6 +36,7 @@ static class DataManager
         string result = "";
         result += (char)(data.Zoom_Speed + 1);
         result += (char)(data.Scroll_Sensitivity + 1);
+        result += (char)(data.Quality_Level + 1);
         PlayerPrefs.SetString(Settings_Name, result);
     }
 
@@ -46,9 +49,12 @@ static class DataManager
 
         Settings_Data result = new Settings_Data();
         string data = PlayerPrefs.GetString(Settings_Name);
+        if (data.Length != 3)
+            return Init_Settings_Data();
 
         result.Zoom_Speed = (byte)(data[0] - 1);
         result.Scroll_Sensitivity = (byte)(data[1] - 1);
+        result.Quality_Level = (byte)(data[2] - 1);
 
         return result;
     }
@@ -89,6 +95,8 @@ static class DataManager
 
         LevelProgress_Data[] result = new LevelProgress_Data[Levels_Count];
         string data = PlayerPrefs.GetString(LevelsProgress_Name);
+        if (data.Length != Levels_Count)
+            return Init_LevelsProgress_Data();
 
         for (int i = 0; i < Levels_Count; i++)
         {

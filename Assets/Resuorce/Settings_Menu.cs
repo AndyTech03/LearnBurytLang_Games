@@ -3,6 +3,10 @@ using UnityEngine.UI;
 
 public class Settings_Menu : MonoBehaviour
 {
+    [SerializeField] private Toggle Low_Quality;
+    [SerializeField] private Toggle Medium_Quality;
+    [SerializeField] private Toggle Hight_Quality;
+
     [SerializeField] private Slider ZoomSpeed_Slider;
     [SerializeField] private Slider ScrollSensitivity_Slider;
 
@@ -34,7 +38,7 @@ public class Settings_Menu : MonoBehaviour
     {
         State = Menu_State.Closed;
         Panel_Opened_Pos = Settings_Panel.position;
-        Settings_Panel.position = Panel_Closed_Pos = new Vector3(Panel_Opened_Pos.x, Panel_Opened_Pos.y + Settings_Panel.rect.height, Panel_Opened_Pos.z);
+        Settings_Panel.position = Panel_Closed_Pos = new Vector3(Panel_Opened_Pos.x, Screen.height + Settings_Panel.rect.height*.8f, Panel_Opened_Pos.z);
         Blur_Color = Blur_Image.color;
         Blur_Image.color = Transparent_Color = new Color(Blur_Color.r, Blur_Color.g, Blur_Color.b, 0);
         Delta_Pos = Panel_Closed_Pos - Panel_Opened_Pos;
@@ -85,6 +89,23 @@ public class Settings_Menu : MonoBehaviour
             DataManager.Settings_Data data = DataManager.Get_Settings_Data();
             ZoomSpeed_Slider.value = data.Zoom_Speed;
             ScrollSensitivity_Slider.value = data.Scroll_Sensitivity;
+            switch (data.Quality_Level)
+            {
+                case (byte)QualityLevel.Fastest:
+                case (byte)QualityLevel.Fast:
+                    Low_Quality.isOn = true;
+                    break;
+                case (byte)QualityLevel.Beautiful:
+                case (byte)QualityLevel.Fantastic:
+                    Hight_Quality.isOn = true;
+                    break;
+                case (byte)QualityLevel.Simple:
+                case (byte)QualityLevel.Good:
+                default:
+                    Medium_Quality.isOn = true;
+                    break;
+            }
+
             State = Menu_State.Opening;
         }
         else
@@ -96,6 +117,13 @@ public class Settings_Menu : MonoBehaviour
         DataManager.Settings_Data data = new DataManager.Settings_Data();
         data.Zoom_Speed = (byte)ZoomSpeed_Slider.value;
         data.Scroll_Sensitivity = (byte)ScrollSensitivity_Slider.value;
+        if (Low_Quality.isOn)
+            data.Quality_Level = 0;
+        else if (Medium_Quality.isOn)
+            data.Quality_Level = 2;
+        else if (Hight_Quality.isOn)
+            data.Quality_Level = 4;
+
         DataManager.Save_Settings_Data(data);
 
         Settings_Chainging?.Invoke();
