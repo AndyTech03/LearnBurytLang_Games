@@ -118,11 +118,11 @@ public class Settings_Menu : MonoBehaviour
         data.Zoom_Speed = (byte)ZoomSpeed_Slider.value;
         data.Scroll_Sensitivity = (byte)ScrollSensitivity_Slider.value;
         if (Low_Quality.isOn)
-            data.Quality_Level = 0;
+            data.Quality_Level = 1;
         else if (Medium_Quality.isOn)
-            data.Quality_Level = 2;
+            data.Quality_Level = 3;
         else if (Hight_Quality.isOn)
-            data.Quality_Level = 4;
+            data.Quality_Level = 5;
 
         DataManager.Save_Settings_Data(data);
 
