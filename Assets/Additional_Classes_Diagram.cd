@@ -1,16 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="Camera_Mover">
-    <Position X="4.25" Y="0.5" Width="3" />
-    <TypeIdentifier>
-      <HashCode>CAAAggQAAiAAQAAEAAAAEAAEEEkAAAAAgAAACAAAAAA=</HashCode>
-      <FileName>Assets\Resuorce\Camera_Mover.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="ObjectMover">
     <Position X="7.5" Y="0.5" Width="4.5" />
     <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
+      <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <NestedTypes>
       <Class Name="ObjectMover.Node&lt;T&gt;">
@@ -35,25 +28,8 @@
       <FileName>Assets\g_1\s\ObjectMover.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CompareGame.ImageCartridge">
-    <Position X="4.25" Y="5.25" Width="3" />
-    <TypeIdentifier>
-      <HashCode>kAEAEAAABCCAABEQCQAQAAgAAAAAABAAAAgCAAAAAAA=</HashCode>
-      <FileName>Assets\g_1\s\ImageCartridge.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Button">
-    <Position X="4.25" Y="10.25" Width="3" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAgAABAAAAAAAAAAAFAAIAAAEIAACQAACAgQ=</HashCode>
-      <FileName>Assets\g_1\s\Button.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="DataManager">
     <Position X="12.25" Y="0.5" Width="3" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
     <NestedTypes>
       <Struct Name="DataManager.LevelProgress_Data">
         <TypeIdentifier>
@@ -72,9 +48,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Settings_Menu">
-    <Position X="12.25" Y="7" Width="3" />
+    <Position X="4.25" Y="0.5" Width="3" />
     <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
+      <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <NestedTypes>
       <Enum Name="Settings_Menu.Menu_State">
@@ -84,7 +60,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAgQIAAAiAAAACAAAAACAEAAQAAAEoAAAJAJACAQAA=</HashCode>
+      <HashCode>AQAgQIAAAiAAAACAAAIACAEAAQAACEoAAAJAJACAQAA=</HashCode>
       <FileName>Assets\Resuorce\Settings_Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
